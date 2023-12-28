@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: e-house-manager
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    open-in-view: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=e_house_manager&useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
