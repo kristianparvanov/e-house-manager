@@ -17,9 +17,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class EmployeeService {
 
-    private static final String EMPLOYEE_NOT_FOUND_BY_ID_TEMPLATE = "Employee not found, id: %s";
-    private static final String EMPLOYEE_NOT_FOUND_BY_EMAIL_TEMPLATE = "Employee not found, email: %s";
-    private static final String EMPLOYEE_ALREADY_EXISTS = "Employee already exists, email: %s";
+    private static final String EMPLOYEE_NOT_FOUND_BY_ID_TEMPLATE = "Employee not found - id: %s";
+    private static final String EMPLOYEE_NOT_FOUND_BY_EMAIL_TEMPLATE = "Employee not found - email: %s";
+    private static final String EMPLOYEE_ALREADY_EXISTS = "Employee already exists - email: %s";
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
@@ -40,7 +40,7 @@ public class EmployeeService {
         return employeeMapper.toDto(getById(id));
     }
 
-    public EmployeeDto read(String email) {
+    public EmployeeDto searchByEmail(String email) {
         return employeeRepository.findByEmailIgnoreCase(email)
                 .map(employeeMapper::toDto)
                 .orElseThrow(() -> new EmployeeException(String.format(EMPLOYEE_NOT_FOUND_BY_EMAIL_TEMPLATE, email)));

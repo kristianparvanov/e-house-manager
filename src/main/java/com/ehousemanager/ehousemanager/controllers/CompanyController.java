@@ -8,6 +8,7 @@ import com.ehousemanager.ehousemanager.services.CompanyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
@@ -47,9 +49,9 @@ public class CompanyController {
     }
 
     @Operation(summary = "Get a company by name", description = "Returns a company information by name.")
-    @GetMapping("/{name}")
-    public CompanyDto read(@PathVariable String name) {
-        return companyService.read(name);
+    @GetMapping("/search")
+    public CompanyDto search(@RequestParam @NotBlank String name) {
+        return companyService.searchByName(name);
     }
 
     @Operation(summary = "Update a company name by id", description = "Returns a company.")

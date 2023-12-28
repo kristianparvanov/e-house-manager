@@ -19,9 +19,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CompanyService {
 
-    private static final String COMPANY_NOT_FOUND_BY_NAME_TEMPLATE = "Company not found, name: %s";
-    private static final String COMPANY_NOT_FOUND_BY_ID_TEMPLATE = "Company not found, id: %s";
-    private static final String COMPANY_ALREADY_EXISTS_BY_NAME_TEMPLATE = "Company already exists, name: %s";
+    private static final String COMPANY_NOT_FOUND_BY_NAME_TEMPLATE = "Company not found - name: %s";
+    private static final String COMPANY_NOT_FOUND_BY_ID_TEMPLATE = "Company not found - id: %s";
+    private static final String COMPANY_ALREADY_EXISTS_BY_NAME_TEMPLATE = "Company already exists - name: %s";
 
     private final CompanyRepository companyRepository;
     private final CompanyMapper companyMapper;
@@ -41,7 +41,7 @@ public class CompanyService {
         return companyMapper.toDto(getCompany(id));
     }
 
-    public CompanyDto read(String name) {
+    public CompanyDto searchByName(String name) {
         return companyRepository.findByNameIgnoreCase(name)
                 .map(companyMapper::toDto)
                 .orElseThrow(() -> new CompanyException(String.format(COMPANY_NOT_FOUND_BY_NAME_TEMPLATE, name)));

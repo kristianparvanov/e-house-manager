@@ -1,7 +1,7 @@
 package com.ehousemanager.ehousemanager.mappers;
 
 import com.ehousemanager.ehousemanager.dtos.employees.CreateEmployeeDto;
-import com.ehousemanager.ehousemanager.dtos.employees.EmployeeCompanyDto;
+import com.ehousemanager.ehousemanager.dtos.employees.EmployeeInfoDto;
 import com.ehousemanager.ehousemanager.dtos.employees.EmployeeDto;
 import com.ehousemanager.ehousemanager.dtos.employees.UpdateEmployeeDto;
 import com.ehousemanager.ehousemanager.entities.Employee;
@@ -13,10 +13,10 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = BuildingMapper.class)
 public interface EmployeeMapper {
 
-    EmployeeCompanyDto toCompanyDto(Employee employee);
+    EmployeeInfoDto toInfoDto(Employee employee);
 
     @Mapping(target = "company", source = "employee.company.name")
     EmployeeDto toDto(Employee employee);

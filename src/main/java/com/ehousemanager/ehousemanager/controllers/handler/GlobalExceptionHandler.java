@@ -1,7 +1,9 @@
 package com.ehousemanager.ehousemanager.controllers.handler;
 
 import com.ehousemanager.ehousemanager.dtos.ErrorResponseDto;
+import com.ehousemanager.ehousemanager.exceptions.BuildingException;
 import com.ehousemanager.ehousemanager.exceptions.CompanyException;
+import com.ehousemanager.ehousemanager.exceptions.EmployeeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -20,7 +22,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorResponseDto handleArgumentNotValid(MethodArgumentNotValidException exception) {
-        final Map<String, String> errorList = exception
+        Map<String, String> errorList = exception
                 .getBindingResult()
                 .getFieldErrors().stream()
                 .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
@@ -31,7 +33,7 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ CompanyException.class })
+    @ExceptionHandler({CompanyException.class, EmployeeException.class, BuildingException.class})
     public ErrorResponseDto handleBadRequestExceptions(RuntimeException exception) {
         log.error(exception.getMessage());
 
