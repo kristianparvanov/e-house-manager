@@ -4,6 +4,7 @@ import com.ehousemanager.ehousemanager.dtos.ErrorResponseDto;
 import com.ehousemanager.ehousemanager.exceptions.BuildingException;
 import com.ehousemanager.ehousemanager.exceptions.CompanyException;
 import com.ehousemanager.ehousemanager.exceptions.EmployeeException;
+import com.ehousemanager.ehousemanager.exceptions.UserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -33,7 +34,7 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({CompanyException.class, EmployeeException.class, BuildingException.class})
+    @ExceptionHandler({CompanyException.class, EmployeeException.class, BuildingException.class, UserException.class})
     public ErrorResponseDto handleBadRequestExceptions(RuntimeException exception) {
         log.error(exception.getMessage());
 

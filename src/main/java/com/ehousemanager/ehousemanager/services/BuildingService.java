@@ -32,6 +32,7 @@ public class BuildingService {
     }
 
     public Page<BuildingDto> readAll(Pageable pageable) {
+        // TODO
         return null;
     }
 
